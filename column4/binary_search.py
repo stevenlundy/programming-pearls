@@ -9,13 +9,21 @@ def find_position(values, target):
         elif values[middle] < target:
             bottom = middle + 1
         else:  # values[middle] == target
-            return middle
+            if middle == 0 or values[middle - 1] < target:
+                # found the first value
+                return middle
+            elif values[middle - 1] == target:
+                top = middle - 1
+
     return -1
 
 assert find_position([1,2,3], 2) == 1
 assert find_position([1,2,3,4], 2) == 1
 assert find_position([1,3,4,5], 5) == 3
 assert find_position([1,3,4,5], 1) == 0
+assert find_position([1,1,1,1,1,1,1], 1) == 0
+assert find_position([0,1,1,1,1,1,1], 1) == 1
+assert find_position([0,0,0,0,0,1,1], 1) == 5
 
 assert find_position([1,3,4,5], 2) == -1
 assert find_position([1,3,4,5], 7) == -1
